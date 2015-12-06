@@ -1,0 +1,16 @@
+{
+  "name": "generator-angular-webpack-babel",
+  "version": "0.1.0",
+  "description": "A opinioated generator for angular projects utilizing Webpack and Babel",
+  "files":[
+    "generators/app"
+  ],
+  "keywords": [
+    "yeoman-generator"
+  ],
+  "author": "Aleksander Herforth Rendtslev",
+  "license": "MIT",
+  "dependencies": {
+    "yeoman-generator": "^0.21.1"
+  }
+}
