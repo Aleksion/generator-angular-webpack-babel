@@ -1,4 +1,8 @@
-/* @ngInject */
-export default function config(){
-  console.log("Sample Config loaded")
+
+/**
+ * Run function for something
+ * @param  $stateProvider [description]
+ */
+/* @ngInject */
+export default function config() {
 }

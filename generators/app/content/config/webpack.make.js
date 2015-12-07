@@ -2,6 +2,7 @@
 
 // Modules
 var webpack = require('webpack');
+var path = require("path");
 var autoprefixer = require('autoprefixer');
 var configModule = require('./webpack.module');
 var plugins = require('./webpack.plugins');
@@ -32,6 +33,23 @@ module.exports = function makeWebpackConfig (options) {
    */
   var config = {};
 
+
+  /**
+   * Make bower_components available for the resolvers
+   * @type {Object}
+   */
+  config.resolve = {
+        root: [path.join(__dirname, "./bower_components")]
+  }
+
+  /**
+   * use the .eslint config
+   * optionally enable autofix to force rules
+   */
+   config.eslint = {
+     configFile: '.eslintrc',
+     //fix: true
+   }
   /**
    * Entry
    * Reference: http://webpack.github.io/docs/configuration.html#entry

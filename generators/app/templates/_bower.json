@@ -1,0 +1,19 @@
+{
+  "name": "<%= appName %>",
+  "description": "<%= appDescription %>",
+  "main": "./client/app/app.js",
+  "authors": [
+    "Aleksander Herforth Rendtslev <aleksanderhr@live.com>"
+  ],
+  "license": "MIT",
+  "moduleType": [],
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {}
+}

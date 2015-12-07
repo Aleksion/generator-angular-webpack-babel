@@ -5,9 +5,6 @@ module.exports  = generators.NamedBase.extend({
   promptUser: function () {
     var done = this.async();
 
-    // have Yeoman greet the user
-    console.log(this.yeoman);
-
     var prompts = [
     {
       name: 'includeRun',

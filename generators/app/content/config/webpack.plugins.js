@@ -28,7 +28,10 @@ module.exports = function(options){
     new ngAnnotatePlugin({
             add: true,
             // other ng-annotate options here
-    })
+    }),
+    new webpack.ResolverPlugin(
+           new webpack.ResolverPlugin.DirectoryDescriptionFilePlugin("../bower.json", ["main"])
+    )
   ];
 
   // Skip rendering index.html in test mode

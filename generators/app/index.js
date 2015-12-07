@@ -25,6 +25,7 @@ module.exports = generators.Base.extend({
     }.bind(this))
   },
   scaffoldFolders: function(){
+    mkdirp.sync("bower_components");
     mkdirp.sync("client");
     mkdirp.sync("client/assets");
     mkdirp.sync("client/assets/fonts");
@@ -43,6 +44,7 @@ module.exports = generators.Base.extend({
       appDescription : this.description
     }
 
+    this.template("_bower.json", 'bower.json', context);
     this.template("_package.json", 'package.json', context);
     this.template("_index.html", 'client/index.html', context);
   },

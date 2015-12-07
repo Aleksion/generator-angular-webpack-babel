@@ -44,7 +44,7 @@ function makeLoaders(options){
     // Compiles ES6 and ES7 into ES5 code
     test: /\.(js|jsx)$/,
     loader: 'babel',
-    exclude: /node_modules/
+    exclude: [/node_modules/,/bower_components/]
   }, {
     // ASSET LOADER
     // Reference: https://github.com/webpack/file-loader
@@ -53,7 +53,7 @@ function makeLoaders(options){
     // Pass along the updated reference to your code
     // You can add here any file extension you want to get copied to your output
     test: /\.(png|jpg|jpeg|gif|svg|woff|woff2|ttf|eot)$/,
-    loader: 'file'
+    loader: "file-loader?name=[name].[ext]"
   }, {
     // HTML LOADER
     // Reference: https://github.com/webpack/raw-loader
@@ -73,7 +73,8 @@ function makeLoaders(options){
   {
        test: /\.scss$/,
        loaders: ["style", "css", "sass"]
-  }
+  },
+  {test: /\.js$/, loader: "eslint-loader", exclude: [/node_modules/,/bower_components/]}
   ];
 
   return loaders
