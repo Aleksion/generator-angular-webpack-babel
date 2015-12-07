@@ -1,6 +1,7 @@
 var generators = require('yeoman-generator');
+var mkdirp = require('mkdirp');
 
-module.exports  = generators.NameBase.extend({
+module.exports  = generators.NamedBase.extend({
   promptUser: function () {
     var done = this.async();
 
@@ -17,33 +18,37 @@ module.exports  = generators.NameBase.extend({
       name: 'includeConfig',
       message: "Should your feature have a config function?",
       default: true
+    },{
+      name: 'path',
+      message: "Where do you want to scaffold your feature?",
+      default: './'
     }];
 
     this.prompt(prompts, function(props){
       this.includeRun = props.includeRun
       this.includeConfig = props.includeConfig
+      this.path = props.path
 
       done();
     }.bind(this))
   },
-  scaffoldFolders: function () {
-    this.mkdir(this.name)
-  },
   copyMainFiles: function(){
+    this.destinationRoot(this.path+this.name);
     var context = {
       featureName: this.name,
-      includeRun = this.includeRun,
-      includeConfig = this.includeConfig
+      includeRun : this.includeRun,
+      includeConfig : this.includeConfig
     }
 
     if(this.includeRun){
-      this.template("_run.js", this.name + "/" +this.name +".run.js", context);
+      this.template("_run.js", this.name +".run.js", context);
     }
     if(this.includeConfig){
-      this.template("_config.js", this.name + "/" +this.name +".config.js", context);
+      this.template("_config.js", this.name +".config.js", context);
     }
-      this.template("_routes.js", this.name + "/" +this.name +".routes.js", context);
-      this.template("_controller.js", this.name + "/" +this.name +".controller.js", context);
-      this.template("_index.js", this.name + "/index.js", context);
+      this.template("_tpl.html", this.name +".tpl.html", context);
+      this.template("_routes.js", this.name +".routes.js", context);
+      this.template("_controller.js", this.name +".controller.js", context);
+      this.template("_index.js", "index.js", context);
   }
 });

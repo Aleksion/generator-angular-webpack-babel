@@ -1,8 +1,10 @@
 
-export default class <%=moduleName%>Controller {
+export default class <%=featureName%>Controller {
   static get UID(){
-    return <%=moduleName+"Controller"%>
+    return "<%=featureName+"Controller"%>"
   }
+  
+  /* @ngInject */
   constructor() {
 
   }

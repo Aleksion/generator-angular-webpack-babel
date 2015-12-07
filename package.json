@@ -1,8 +1,8 @@
 {
-  "name": "generator-angular-webpack-babel",
+  "name": "generator-angular-webpack-starter",
   "version": "0.1.0",
   "description": "A opinioated generator for angular projects utilizing Webpack and Babel",
-  "files":[
+  "files": [
     "generators/app"
   ],
   "keywords": [
@@ -12,5 +12,8 @@
   "license": "MIT",
   "dependencies": {
     "yeoman-generator": "^0.21.1"
+  },
+  "devDependencies": {
+    "mkdirp": "^0.5.1"
   }
 }

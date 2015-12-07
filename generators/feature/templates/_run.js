@@ -1,12 +1,7 @@
 /**
- * Specify any dependencies here. Alternatively shift to ngAnnotate
- * @type {string}
- */
-run.$inject = []
-
-/**
  * Run function for <%= featureName %>
  * @param  $stateProvider [description]
  */
+/* @ngInject */
 export default function run() {
 }
