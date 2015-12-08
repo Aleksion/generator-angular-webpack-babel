@@ -16,7 +16,6 @@ import config from '<%= "./"+directiveName+".config" %>';
 
 export default angular.module("<%= directiveName %>" , [])
   <%_ if(includeConfig){ _%>  .config(config)<%_ } %>
-  .config(routes)
   <%_ if(includeRun){ _%> .run(run)  <%_ } %>
   .controller(controller.UID, controller)
   .directive("<%= directiveName %>", directive)

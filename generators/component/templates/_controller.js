@@ -5,6 +5,6 @@ export default class <%=directiveName%>Controller {
 
   /* @ngInject */
   constructor() {
-
+    this.title = "<%= "I am a "+ directiveName+" component"%>"
   }
 }

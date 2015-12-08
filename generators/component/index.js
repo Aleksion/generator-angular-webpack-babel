@@ -38,7 +38,7 @@ module.exports  = generators.NamedBase.extend({
     }.bind(this))
   },
   copyMainFiles: function(){
-    this.destinationRoot(this.path+this.name);
+    this.destinationRoot(this.name);
     var context = {
       directiveName: this.name,
       includeRun : this.includeRun,
@@ -57,6 +57,6 @@ module.exports  = generators.NamedBase.extend({
       this.template("_directive.js", this.name +".directive.js", context);
       this.template("_controller.js", this.name +".controller.js", context);
       this.template("_index.js", "index.js", context);
-      this.template("_scss.js", this.name+".scss", context);
+      this.template("_.scss", this.name+".scss", context);
   }
 });

@@ -1,8 +1,8 @@
 import controller from '<%= "./"+directiveName+".controller" %>'
 
-export default function<%=directiveName%>(){
+export default function <%=directiveName%>(){
   return {
-    restrict: '<%_ if(bindToElement) %>E<%_ }if(bindToAttribute){%> A <%_ } %>',
+    restrict: '<% if(bindToElement) {%>E<% }if(bindToAttribute){%>A<% } %>',
     scope: {
 
     },

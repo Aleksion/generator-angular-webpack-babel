@@ -15,22 +15,17 @@ module.exports  = generators.NamedBase.extend({
       name: 'includeConfig',
       message: "Should your feature have a config function?",
       default: true
-    },{
-      name: 'path',
-      message: "Where do you want to scaffold your feature?",
-      default: './'
     }];
 
     this.prompt(prompts, function(props){
       this.includeRun = props.includeRun
       this.includeConfig = props.includeConfig
-      this.path = props.path
 
       done();
     }.bind(this))
   },
   copyMainFiles: function(){
-    this.destinationRoot(this.path+this.name);
+    this.destinationRoot(this.name);
     var context = {
       featureName: this.name,
       includeRun : this.includeRun,
@@ -47,6 +42,6 @@ module.exports  = generators.NamedBase.extend({
       this.template("_routes.js", this.name +".routes.js", context);
       this.template("_controller.js", this.name +".controller.js", context);
       this.template("_index.js", "index.js", context);
-      this.template("_scss.js", this.name+".scss", context);
+      this.template("_.scss", this.name+".scss", context);
   }
 });
