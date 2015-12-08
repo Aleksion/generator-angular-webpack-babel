@@ -28,7 +28,7 @@ Taken from Foxandxss original README:
 ## Installation
 
 ### Requirements
-
+The project also requires a MINIMUM of node v. 0.12.0. I recommend installing the latest version.
 First of all, make sure you have installed all the requirements to run the project:
 
 Install ``yo``, ``grunt-cli``, ``webpack``, ``karma``, ``eslint``, ``babel-eslint``
