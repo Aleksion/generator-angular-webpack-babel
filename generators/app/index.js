@@ -44,6 +44,7 @@ module.exports = generators.Base.extend({
       appDescription : this.description
     }
 
+    this.copy('../../../README.md', 'README.md');
     this.template("_bower.json", 'bower.json', context);
     this.template("_package.json", 'package.json', context);
     this.template("_index.html", 'client/index.html', context);
