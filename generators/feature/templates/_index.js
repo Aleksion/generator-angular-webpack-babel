@@ -1,3 +1,6 @@
+// Import Style
+import '<%= "./"+featureName+".scss" %>';
+
 
 import angular from 'angular';
 import uirouter from 'angular-ui-router';

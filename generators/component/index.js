@@ -8,23 +8,31 @@ module.exports  = generators.NamedBase.extend({
     var prompts = [
     {
       name: 'includeRun',
-      message: "Should your feature have a run function?",
-      default: true
+      message: "Should your directive have a run function?",
+      default: false
     },
     {
       name: 'includeConfig',
-      message: "Should your feature have a config function?",
+      message: "Should your directive have a config function?",
+      default: false
+    },
+    {
+      name: 'bindToElement',
+      message: "Should your directive be restricted to Element?",
       default: true
-    },{
-      name: 'path',
-      message: "Where do you want to scaffold your feature?",
-      default: './'
-    }];
+    },
+    {
+      name: 'bindToAttribute',
+      message: "Should your directive be restricted to Attribute?",
+      default: true
+    }
+  ];
 
     this.prompt(prompts, function(props){
       this.includeRun = props.includeRun
       this.includeConfig = props.includeConfig
-      this.path = props.path
+      this.bindToElement = props.bindToElement
+      this.bindToAttribute = props.bindToAttribute
 
       done();
     }.bind(this))
@@ -32,9 +40,11 @@ module.exports  = generators.NamedBase.extend({
   copyMainFiles: function(){
     this.destinationRoot(this.path+this.name);
     var context = {
-      featureName: this.name,
+      directiveName: this.name,
       includeRun : this.includeRun,
-      includeConfig : this.includeConfig
+      includeConfig : this.includeConfig,
+      bindToElement : this.bindToElement,
+      bindToAttribute : this.bindToAttribute
     }
 
     if(this.includeRun){
@@ -44,7 +54,7 @@ module.exports  = generators.NamedBase.extend({
       this.template("_config.js", this.name +".config.js", context);
     }
       this.template("_tpl.html", this.name +".tpl.html", context);
-      this.template("_routes.js", this.name +".routes.js", context);
+      this.template("_directive.js", this.name +".directive.js", context);
       this.template("_controller.js", this.name +".controller.js", context);
       this.template("_index.js", "index.js", context);
       this.template("_scss.js", this.name+".scss", context);
