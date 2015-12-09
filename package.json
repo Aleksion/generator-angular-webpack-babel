@@ -1,10 +1,11 @@
 {
   "name": "generator-angular-webpack-starter",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "A opinioated generator for angular projects utilizing Webpack and Babel",
   "files": [
     "generators/app",
-    "generators/feature"
+    "generators/feature",
+    "generators/component"
   ],
   "repository": {
     "type": "git",
