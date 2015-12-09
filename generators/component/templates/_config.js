@@ -1,6 +1,6 @@
 
 /**
- * Run function for <%= featureName %>
+ * Run function for <%= directiveName %>
  * @param  $stateProvider [description]
  */
 /* @ngInject */
