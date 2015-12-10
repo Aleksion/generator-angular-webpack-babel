@@ -15,6 +15,7 @@ module.exports = function makeWebpackConfig (options) {
    */
   var BUILD = !!options.BUILD;
   var TEST = !!options.TEST;
+  var ENV = options.ENVIRONMENT;
 
   /**
    * Prepare basic options object
@@ -39,7 +40,10 @@ module.exports = function makeWebpackConfig (options) {
    * @type {Object}
    */
   config.resolve = {
-        root: [path.join(__dirname, "./bower_components")]
+        root: [path.join(__dirname, "./bower_components")],
+        alias: {
+          appConstants: "./"+ENV+".constants.js"
+        }
   }
 
   /**
@@ -101,7 +105,7 @@ module.exports = function makeWebpackConfig (options) {
   } else if (BUILD) {
     config.devtool = 'source-map';
   } else {
-    config.devtool = 'eval';
+    config.devtool = '#eval-module-source-map';
   }
 
 
@@ -129,7 +133,10 @@ module.exports = function makeWebpackConfig (options) {
       modules: false,
       cached: false,
       colors: true,
-      chunk: false
+      chunk: true,
+      inline: true,
+      progres: true,
+      hot: true
     },
     port:configOptions.devServerPort
   };

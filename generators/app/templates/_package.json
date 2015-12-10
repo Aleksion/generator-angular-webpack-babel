@@ -3,8 +3,10 @@
   "version": "1.0.0",
   "description": "<%= appDescription %>",
   "scripts": {
-    "build": "webpack --config webpack.build.js --bail -p",
-    "dev": "webpack-dev-server --history-api-fallback --inline --progress --hot",
+    "build": "webpack --bail -p --build true ",
+    "serve": "webpack-dev-server --inline",
+    "serve:dev": "webpack-dev-server --type dev --inline",
+    "serve:prod": "webpack-dev-server --type prod --inline",
     "test": "karma start",
     "test:live": "karma start --auto-watch --no-single-run"
   },
@@ -26,6 +28,7 @@
     "babel-runtime": "^6.3.13",
     "browser-sync": "^2.10.0",
     "browser-sync-webpack-plugin": "^1.0.1",
+    "commander": "^2.9.0",
     "css-loader": "^0.21.0",
     "eslint": "^1.10.3",
     "eslint-loader": "^1.1.1",

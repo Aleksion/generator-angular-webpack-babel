@@ -57,12 +57,21 @@ yo angular-webpack-starter
 All scripts are run with `npm run [script]`, for example: `npm run test`.
 
 * `build` - generate a minified build to dist folder
-* `dev` - start development server, try it by opening `http://localhost:8080/` or the browserSync version at `http://localhost:3000/``
+* `serve` - start development server with local configuration, try it by opening `http://localhost:8080/` or the browserSync version at `http://localhost:3000/``
+* `serve:dev` - development server with development configuration
+* `serve:prod`- development server with production configuration
 * `test` - run all tests
 * `test:live` - continuously run unit tests watching for changes
 
 See what each script does by looking at the `scripts` section in [package.json](./package.json).
 
+Local, Develop and Production configuration can be configured in the following files in `client/app/`:
+```
+local.constants.js
+dev.constants.js
+prod.constants.js
+```
+Webpack will automatically know which one to use based on the serve parameter provided.
 ### Sub-generators
 * [angular-webpack-starter:feature]
 * [angular-webpack-starter:component]

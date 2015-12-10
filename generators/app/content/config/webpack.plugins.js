@@ -46,7 +46,7 @@ module.exports = function(options){
     )
   }
 
-  if(!TEST && !GRUNT){
+  if(!BUILD && !TEST){
     plugins.push(
       new BrowserSyncPlugin(
         // BrowserSync options
