@@ -1,6 +1,6 @@
 {
   "name": "generator-angular-webpack-starter",
-  "version": "0.2.6",
+  "version": "0.2.7",
   "description": "A opinioated generator for angular projects utilizing Webpack and Babel",
   "files": [
     "generators/app",

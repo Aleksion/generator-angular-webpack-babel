@@ -7,8 +7,8 @@
     "serve": "webpack-dev-server --inline",
     "serve:dev": "webpack-dev-server --type dev --inline",
     "serve:prod": "webpack-dev-server --type prod --inline",
-    "test": "karma start",
-    "test:live": "karma start --auto-watch --no-single-run"
+    "test": "karma start --test",
+    "test:live": "karma start --test --auto-watch --no-single-run"
   },
   "license": "MIT",
   "dependencies": {
