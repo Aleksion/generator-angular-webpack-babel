@@ -1,163 +1,66 @@
 'use strict';
 
 // Modules
-var webpack = require('webpack');
-var path = require("path");
-var autoprefixer = require('autoprefixer');
-var configModule = require('./webpack.module');
-var plugins = require('./webpack.plugins');
+var _ = require('lodash');
 
-module.exports = function makeWebpackConfig (options) {
+var defaultConfig = require('./webpack.config.default');
+var buildConfig = require('./webpack.config.build');
+var moduleConfig = require('./webpack.config.module');
+var serveConfig = require('./webpack.config.serve');
+var testConfig = require('./webpack.config.test');
+
+module.exports = function makeWebpackConfig(options) {
   /**
    * Environment type
    * BUILD is for generating minified builds
    * TEST is for generating test builds
    */
-  var BUILD = !!options.BUILD;
-  var TEST = !!options.TEST;
+   var TYPE = options.TYPE;
   var ENV = options.ENVIRONMENT;
-
-  /**
-   * Prepare basic options object
-   */
-    var configOptions = {
-      BUILD: BUILD,
-      TEST: TEST,
-      GRUNT: !!options.GRUNT,
-      devServerPort: 8080
-    };
-
-  /**
-   * Config
-   * Reference: http://webpack.github.io/docs/configuration.html
-   * This is the object where all configuration gets set
-   */
-  var config = {};
-
-
-  /**
-   * Make bower_components available for the resolvers
-   * @type {Object}
-   */
-  config.resolve = {
-        root: [path.join(__dirname, "./bower_components")],
-        alias: {
-          appConstants: "./"+ENV+".constants.js"
-        }
-  }
-
-  /**
-   * use the .eslint config
-   * optionally enable autofix to force rules
-   */
-   config.eslint = {
-     configFile: '.eslintrc',
-     //fix: true
-   }
-  /**
-   * Entry
-   * Reference: http://webpack.github.io/docs/configuration.html#entry
-   * Should be an empty object if it's generating a test build
-   * Karma will set this when it's a test build
-   */
-  if (TEST) {
-    config.entry = {}
-  } else {
-    config.entry = {
-      app: './client/app/app.js'
-    }
-  }
-
-  /**
-   * Output
-   * Reference: http://console.github.io/docs/configuration.html#output
-   * Should be an empty object if it's generating a test build
-   * Karma will handle setting it up for you when it's a test build
-   */
-  if (TEST) {
-    config.output = {}
-  } else {
-    config.output = {
-      // Absolute output directory
-      path: __dirname + '/../dist',
-
-      // Output path from the view of the page
-      // Uses webpack-dev-server in development
-      publicPath: BUILD ? '/' : 'http://localhost:8080/',
-
-      // Filename for entry points
-      // Only adds hash in build mode
-      filename: BUILD ? '[name].[hash].js' : '[name].bundle.js',
-
-      // Filename for non-entry points
-      // Only adds hash in build mode
-      chunkFilename: BUILD ? '[name].[hash].js' : '[name].bundle.js'
-    }
-  }
-
-  /**
-   * Devtool
-   * Reference: http://webpack.github.io/docs/configuration.html#devtool
-   * Type of sourcemap to use per build type
-   */
-  if(TEST){
-    config.devtool = 'inline-source-map';
-  } else if (BUILD) {
-    config.devtool = 'source-map';
-  } else {
-    config.devtool = '#eval-module-source-map';
-  }
-
-
-
-  /**
-   * PostCSS
-   * Reference: https://github.com/postcss/autoprefixer-core
-   * Add vendor prefixes to your css
-   */
-  config.postcss = [
-    autoprefixer({
-      browsers: ['last 2 version']
-    })
-  ];
-
-
-  /**
-   * Dev server configuration
-   * Reference: http://webpack.github.io/docs/configuration.html#devserver
-   * Reference: http://webpack.github.io/docs/webpack-dev-server.html
-   */
-  config.devServer = {
-    contentBase: '../dist',
-    stats: {
-      modules: false,
-      cached: false,
-      colors: true,
-      chunk: true,
-      inline: true,
-      progres: true,
-      hot: true
-    },
-    port:configOptions.devServerPort
+  var configOptions = {
+    devServerPort: 8080
   };
 
+  // Prepare config object
+  var config = defaultConfig(ENV, configOptions);
 
-  /**
-   * Initialize module (loaders and preloaders)
-   */
-  config.module = configModule(configOptions)
-
-  /**
-   * Initialize plugins
-   */
-  config.plugins = plugins(configOptions)
-
-
-  if(configOptions.GRUNT){
-    config.keepalive = true
-
+  switch (TYPE) {
+    case 'build':
+    var newConfig = buildConfig(ENV, configOptions);
+    // Make sure to apply modules plugins first
+    config.plugins = newConfig.plugins.push.apply(newConfig.plugins, config.plugins);
+    merge(config, newConfig);
+    break;
+    case 'build-module':
+      var newConfig = moduleConfig(ENV, configOptions);
+      // Make sure to apply modules plugins first
+      config.plugins = newConfig.plugins.push.apply(newConfig.plugins, config.plugins);
+      merge(config, newConfig);
+      break;
+    case 'serve':
+      console.log("running serve");
+      merge(config, serveConfig(ENV, configOptions));
+      break;
+    case 'test':
+      config = testConfig(ENV, configOptions);
+      break;
+    default:
+      console.log("running default")
   }
 
-
   return config;
+
 };
+
+/**
+ * Helper funciton for merging configs
+ * @param  {[type]} destination [description]
+ * @param  {[type]} source      [description]
+ */
+function merge(destination, source){
+  _.merge(destination, source, function(a, b) {
+    if (_.isArray(a)) {
+      return a.concat(b);
+    }
+  });
+}
