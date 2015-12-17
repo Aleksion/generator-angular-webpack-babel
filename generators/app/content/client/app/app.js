@@ -13,8 +13,9 @@ import appConstants from 'appConstants';
 // Import internal modules
 import sampleModule from './features/sample';
 
-angular.module('app', [uirouter, sampleModule])
+export default angular.module('app', [uirouter, sampleModule])
   .config(config)
   .config(routes)
   .constant("AppConstants", appConstants)
-  .run(run);
+  .run(run)
+  .name;
