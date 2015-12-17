@@ -15,7 +15,7 @@ module.exports = function makeWebpackConfig(options) {
    * BUILD is for generating minified builds
    * TEST is for generating test builds
    */
-   var TYPE = options.TYPE;
+  var TYPE = options.TYPE;
   var ENV = options.ENVIRONMENT;
   var configOptions = {
     devServerPort: 8080
