@@ -4,8 +4,9 @@
   "description": "<%= appDescription %>",
   "scripts": {
     "build": "npm run build:dist && npm run build:module",
-    "build:dist": "webpack --bail -p --type build",
-    "build:module": "webpack --bail -p --type build-module",
+    "build:dev": "webpack --bail -p --type build --env dev",
+    "build:dist": "webpack --bail -p --type build  --env prod --progress",
+    "build:module": "webpack --bail --type build-module --env prod --progress",
     "serve": "webpack-dev-server --inline --type serve",
     "serve:dev": "webpack-dev-server --env dev --type serve --inline",
     "serve:prod": "webpack-dev-server --env prod --type serve --inline",

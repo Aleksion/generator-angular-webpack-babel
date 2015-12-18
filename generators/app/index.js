@@ -48,6 +48,7 @@ module.exports = generators.Base.extend({
     this.template("_bower.json", 'bower.json', context);
     this.template("_package.json", 'package.json', context);
     this.template("_index.html", 'client/index.html', context);
+    this.template("client/app/_app.js", "client/app/app.js", context);
   },
   installDependencies: function(){
     this.npmInstall();

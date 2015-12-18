@@ -8,11 +8,14 @@ import uirouter from 'angular-ui-router';
 import config from './app.config';
 import routes from './app.routes';
 import run from './app.run';
+import appConstants from 'appConstants';
 
 // Import internal modules
 import sampleModule from './features/sample';
 
-angular.module('app', [uirouter, sampleModule])
+export default angular.module('<%=appName%>', [uirouter, sampleModule])
   .config(config)
   .config(routes)
-  .run(run);
+  .constant("AppConstants", appConstants)
+  .run(run)
+  .name;
