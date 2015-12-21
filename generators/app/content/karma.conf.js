@@ -7,6 +7,7 @@ module.exports = function karmaConfig (config) {
       'jasmine'
     ],
     plugins: [
+      require('phantomjs-polyfill'),
       require("karma-webpack"),
       require("karma-coverage"),
       require("karma-spec-reporter"),
@@ -26,14 +27,16 @@ module.exports = function karmaConfig (config) {
 
     files: [
       // Grab all files in the app folder that contain .spec.
-      'config/webpack.tests.js'
+      //
+      './node_modules/phantomjs-polyfill/bind-polyfill.js',
+      './config/webpack.tests.js'
     ],
 
     preprocessors: {
       // Reference: http://webpack.github.io/docs/testing.html
       // Reference: https://github.com/webpack/karma-webpack
       // Convert files with webpack and load sourcemaps
-        'config/webpack.tests.js': ['webpack', 'sourcemap']
+        './config/webpack.tests.js': ['webpack', 'sourcemap']
     },
 
     browsers: [
