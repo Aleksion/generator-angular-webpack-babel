@@ -103,7 +103,7 @@ Will generate a new component within a folder from the directory that you are cu
 yo angular-webpack-starter:component componentName
 ```
 
-To include the feature in the application, simply add the following to your app.js or one of your features and include it in its module and include it in the module:
+To include the component in the application, simply add the following to your app.js or one of your features and include it in its module and include it in the module:
 ```javascript
 import componentName from './components/componentName';
 
