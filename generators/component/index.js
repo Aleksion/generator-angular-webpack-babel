@@ -1,5 +1,6 @@
 var generators = require('yeoman-generator');
 var mkdirp = require('mkdirp');
+var path = require('path');
 
 module.exports  = generators.NamedBase.extend({
   promptUser: function () {
@@ -38,7 +39,7 @@ module.exports  = generators.NamedBase.extend({
     }.bind(this))
   },
   copyMainFiles: function(){
-    this.destinationRoot(this.name);
+    this.destinationRoot(path.join('client/app/components', this.name));
     var context = {
       directiveName: this.name,
       includeRun : this.includeRun,
