@@ -9,11 +9,13 @@ module.exports  = generators.NamedBase.extend({
     var prompts = [
     {
       name: 'includeRun',
+      type: 'confirm',
       message: "Should your feature have a run function?",
       default: true
     },
     {
       name: 'includeConfig',
+      type: 'confirm',
       message: "Should your feature have a config function?",
       default: true
     }];
